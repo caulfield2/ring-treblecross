@@ -1,0 +1,7 @@
+.idea/
+backend/.idea/
+.DS_store
+backend/build/
+backend/.gradle/
+backend/gradlew
+backend/gradlew.bat
