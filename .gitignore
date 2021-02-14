@@ -1,7 +1,26 @@
+## backend
+.gradle/
+gradlew
+gradlew.bat
+.run
+
+## frontend
+# dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# misc
+npm-debug.log*
+
+## other
+.DS_Store
 .idea/
-backend/.idea/
-.DS_store
-backend/build/
-backend/.gradle/
-backend/gradlew
-backend/gradlew.bat
+build/
