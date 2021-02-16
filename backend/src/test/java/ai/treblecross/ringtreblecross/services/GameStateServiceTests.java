@@ -26,23 +26,20 @@ public class GameStateServiceTests {
     @Test
     public void makeMoveTest() throws RingTreblecrossException {
         boolean[] board = new boolean[4];
-        int k = 2;
+        int k = 1;
         GameStateDto gameStateDto = new GameStateDto(board, k);
 
         GameState mockGameState = new GameState(board);
         boolean[] mockOptimalSuccessorBoard = new boolean[] {true, false, false, false};
         GameState mockOptimalSuccessorGameState = new GameState(mockOptimalSuccessorBoard);
 
-        Node makeMoveMockResult = new Node(mockGameState, mockOptimalSuccessorGameState, -1, 2);
+        Node makeMoveMockResult = new Node(mockGameState, mockOptimalSuccessorGameState, -1, 1);
 
         when(minimaxServiceMock.minimax(any(), anyInt())).thenReturn(makeMoveMockResult);
 
         GameStateDto resultGameStateDto = gameStateService.makeMove(gameStateDto);
 
-        boolean[] expectedBoard = mockOptimalSuccessorBoard;
-        int expectedK = k;
-
-        assertArrayEquals(expectedBoard, resultGameStateDto.getBoard());
-        assertEquals(expectedK, resultGameStateDto.getK());
+        assertArrayEquals(mockOptimalSuccessorBoard, resultGameStateDto.getBoard());
+        assertEquals(k, resultGameStateDto.getK());
     }
 }
