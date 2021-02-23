@@ -1,13 +1,10 @@
 import './App.css';
+import GameBoard from './components/GameBoard/GameBoard';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Ring Treblecross
-        </p>
-      </header>
+      <GameBoard />
     </div>
   );
 }
