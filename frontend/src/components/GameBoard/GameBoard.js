@@ -22,16 +22,39 @@ function GameBoard() {
     }
   });
 
+  function buildGameBoardTest() {
+    const fillStrokeWidth = outerRadius - innerRadius - borderStrokeWidth;
+    const fillRadius = (outerRadius - innerRadius) / 2 + innerRadius;
+    const fillCircumference = 2 * Math.PI * fillRadius;
+
+    const transform = `rotate(270, ${cx}, ${cy})`;
+
+    return (
+      <circle
+        strokeWidth={fillStrokeWidth}
+        strokeDasharray={fillCircumference}
+        strokeDashoffset={fillCircumference / 2}
+        r={fillRadius}
+        cx={cx}
+        cy={cy}
+        transform={transform}
+        stroke="white"
+        fill="transparent"
+      />
+    );
+  }
+
   function buildGameBoard() {
 
   }
 
-  const diameter = Math.min(windowDimensions.height, windowDimensions.width) * 0.75;
-  const radius = diameter / 2;
-  const strokeWidth = 4;
-  const cx = (diameter / 2) + (strokeWidth / 2);
+  const outerDiameter = Math.min(windowDimensions.height, windowDimensions.width) * 0.75;
+  const outerRadius = outerDiameter / 2;
+  const innerRadius = outerRadius * 0.8;
+  const borderStrokeWidth = outerDiameter * 0.01;
+  const cx = (outerDiameter / 2) + (borderStrokeWidth / 2);
   const cy = cx;
-  const svgHeight = diameter + strokeWidth;
+  const svgHeight = outerDiameter + borderStrokeWidth;
   const svgWidth = svgHeight;
 
   return (
@@ -41,18 +64,20 @@ function GameBoard() {
         width={svgWidth}
       >
         <circle
-          strokeWidth={strokeWidth}
-          r={radius}
+          className="game-board-outline"
+          strokeWidth={borderStrokeWidth}
+          r={outerRadius}
           cx={cx}
           cy={cy}
         />
         <circle
-          strokeWidth={strokeWidth}
-          r={radius * 0.8}
+          className="game-board-outline"
+          strokeWidth={borderStrokeWidth}
+          r={innerRadius}
           cx={cx}
           cy={cy}
         />
-        {buildGameBoard()}
+        {buildGameBoardTest()}
       </svg>
     </div>
   );
