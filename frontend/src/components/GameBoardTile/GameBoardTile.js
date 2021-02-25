@@ -1,8 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './GameBoardTile.css'
+import * as GeometryService from '../../services/GeometryService.js'
 
 function GameBoardTile(props) {
-    return (<div />);
+    return (
+        <path
+            className="game-board-tile"
+            d={GeometryService.describeArc(props.cx, props.cy, props.r, props.startDegree, props.endDegree)}
+            strokeWidth={props.strokeWidth}
+            onClick={() => { console.log(`Clicked ${props.i}`) }}
+        />
+    );
 }
 
 GameBoardTile.propTypes = {

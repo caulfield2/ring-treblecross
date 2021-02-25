@@ -1,8 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './GameBoardDivider.css'
+import * as GeometryService from '../../services/GeometryService.js'
 
 function GameBoardDivider(props) {
-    return (<div />);
+    return (
+        <path
+            className="game-board-divider"
+            d={GeometryService.describeArc(props.cx, props.cy, props.r, props.startDegree, props.endDegree)}
+            strokeWidth={props.strokeWidth}
+        />
+    );
 }
 
 GameBoardDivider.propTypes = {

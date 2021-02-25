@@ -1,0 +1,6 @@
+.game-board-tile {
+    stroke: white;
+    cursor: pointer;
+    fill: transparent;
+    pointer-events: visibleStroke;
+}

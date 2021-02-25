@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="App">
       <GameBoard
-        size={3}
+        size={30}
       />
     </div>
   );
