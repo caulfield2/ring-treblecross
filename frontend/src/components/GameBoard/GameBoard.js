@@ -1,7 +1,10 @@
 import React from 'react';
-import './GameBoard.css'
+import PropTypes from 'prop-types';
+import GameBoardDivider from '../GameBoardDivider/GameBoardDivider';
+import GameBoardTile from '../GameBoardTile/GameBoardTile';
+import './GameBoard.css';
 
-function GameBoard() {
+function GameBoard(props) {
   const [windowDimensions, setWindowDimensions] = React.useState({
     height: window.innerHeight,
     width: window.innerWidth
@@ -22,30 +25,56 @@ function GameBoard() {
     }
   });
 
-  function buildGameBoardTest() {
-    const fillStrokeWidth = outerRadius - innerRadius - borderStrokeWidth;
-    const fillRadius = (outerRadius - innerRadius) / 2 + innerRadius;
-    const fillCircumference = 2 * Math.PI * fillRadius;
-
-    const transform = `rotate(270, ${cx}, ${cy})`;
-
-    return (
-      <circle
-        strokeWidth={fillStrokeWidth}
-        strokeDasharray={fillCircumference}
-        strokeDashoffset={fillCircumference / 2}
-        r={fillRadius}
-        cx={cx}
-        cy={cy}
-        transform={transform}
-        stroke="white"
-        fill="transparent"
-      />
-    );
-  }
-
   function buildGameBoard() {
+    const { size } = props;
+    const fillRadius = (outerRadius - innerRadius) / 2 + innerRadius;
+    const fillStrokeWidth = outerRadius - innerRadius - borderStrokeWidth;
 
+    const fillCircumference = 2 * Math.PI * fillRadius;
+    const dividerCircumference = borderStrokeWidth; // Make the divider the same thickness as the border
+    const tileCircumference = (fillCircumference - (dividerCircumference * size)) / size;
+
+    const dividerDegrees = dividerCircumference / fillCircumference * 360;
+    const tileDegrees = tileCircumference / fillCircumference * 360;
+
+    const gameBoard = [];
+
+    let degreePos = 0;
+
+    for (let i = 0; i < size; i++) {
+      gameBoard.push(
+        <GameBoardTile
+          key={i}
+          i={i}
+          r={fillRadius}
+          cx={cx}
+          cy={cy}
+          startDegree={degreePos}
+          endDegree={degreePos + tileDegrees}
+          strokeWidth={fillStrokeWidth}
+        />
+      );
+
+      degreePos += dividerDegrees;
+
+      const divKey = `div${i}`;
+
+      gameBoard.push(
+        <GameBoardDivider
+          key={divKey}
+          r={fillRadius}
+          cx={cx}
+          cy={cy}
+          startDegree={degreePos}
+          endDegree={degreePos + dividerDegrees}
+          strokeWidth={fillStrokeWidth}
+        />
+      );
+
+      degreePos += tileDegrees;
+    }
+
+    return gameBoard;
   }
 
   const outerDiameter = Math.min(windowDimensions.height, windowDimensions.width) * 0.75;
@@ -77,10 +106,14 @@ function GameBoard() {
           cx={cx}
           cy={cy}
         />
-        {buildGameBoardTest()}
+        {buildGameBoard()}
       </svg>
     </div>
   );
+}
+
+GameBoard.propTypes = {
+  size: PropTypes.number.isRequired,
 }
 
 export default GameBoard
