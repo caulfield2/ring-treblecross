@@ -1,5 +1,9 @@
-.game-board-tile {
+.game-board-tile-active {
     cursor: pointer;
     fill: transparent;
     pointer-events: visibleStroke;
+}
+
+.game-board-tile-inactive {
+    fill: transparent;
 }

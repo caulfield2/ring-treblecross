@@ -63,6 +63,7 @@ function GameBoard(props) {
           strokeWidth={fillStrokeWidth}
           activeColor={props.activeTileColor}
           inactiveColor={props.inactiveTileColor}
+          isActive={true} // TODO: Set this based on the state of the global game board array
         />
       );
 
