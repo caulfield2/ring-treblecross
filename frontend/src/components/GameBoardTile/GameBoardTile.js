@@ -9,6 +9,7 @@ function GameBoardTile(props) {
             className="game-board-tile"
             d={GeometryService.describeArc(props.cx, props.cy, props.r, props.startDegree, props.endDegree)}
             strokeWidth={props.strokeWidth}
+            stroke={props.activeColor} // TODO: Add isActive prop and make this dynamic
             onClick={() => { console.log(`Clicked ${props.i}`) }}
         />
     );
@@ -22,6 +23,8 @@ GameBoardTile.propTypes = {
     startDegree: PropTypes.number.isRequired,
     endDegree: PropTypes.number.isRequired,
     strokeWidth: PropTypes.number.isRequired,
+    activeColor: PropTypes.string.isRequired,
+    inactiveColor: PropTypes.string.isRequired,
 }
 
 export default GameBoardTile

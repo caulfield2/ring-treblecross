@@ -37,7 +37,7 @@ function GameBoard(props) {
   function buildGameBoard() {
     const { size } = props;
     const fillRadius = (outerRadius - innerRadius) / 2 + innerRadius;
-    const fillStrokeWidth = outerRadius - innerRadius - borderStrokeWidth;
+    const fillStrokeWidth = (outerRadius - innerRadius - borderStrokeWidth) * 1.015; // To compensate for the imprecision and blend the divider and border
 
     const fillCircumference = 2 * Math.PI * fillRadius;
     const dividerCircumference = borderStrokeWidth; // Make the divider the same thickness as the border
@@ -61,6 +61,8 @@ function GameBoard(props) {
           startDegree={degreePos}
           endDegree={degreePos + tileDegrees}
           strokeWidth={fillStrokeWidth}
+          activeColor={props.activeTileColor}
+          inactiveColor={props.inactiveTileColor}
         />
       );
 
@@ -77,6 +79,7 @@ function GameBoard(props) {
           startDegree={degreePos}
           endDegree={degreePos + dividerDegrees}
           strokeWidth={fillStrokeWidth}
+          color={props.borderColor}
         />
       );
 
@@ -94,6 +97,7 @@ function GameBoard(props) {
       >
         <circle
           className="game-board-outline"
+          stroke={props.borderColor}
           strokeWidth={borderStrokeWidth}
           r={outerRadius}
           cx={cx}
@@ -101,6 +105,7 @@ function GameBoard(props) {
         />
         <circle
           className="game-board-outline"
+          stroke={props.borderColor}
           strokeWidth={borderStrokeWidth}
           r={innerRadius}
           cx={cx}
@@ -114,6 +119,9 @@ function GameBoard(props) {
 
 GameBoard.propTypes = {
   size: PropTypes.number.isRequired,
+  borderColor: PropTypes.string.isRequired,
+  activeTileColor: PropTypes.string.isRequired,
+  inactiveTileColor: PropTypes.string.isRequired,
 }
 
 export default GameBoard

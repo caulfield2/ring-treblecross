@@ -7,6 +7,7 @@ function GameBoardDivider(props) {
     return (
         <path
             className="game-board-divider"
+            stroke={props.color}
             d={GeometryService.describeArc(props.cx, props.cy, props.r, props.startDegree, props.endDegree)}
             strokeWidth={props.strokeWidth}
         />
@@ -20,6 +21,7 @@ GameBoardDivider.propTypes = {
     startDegree: PropTypes.number.isRequired,
     endDegree: PropTypes.number.isRequired,
     strokeWidth: PropTypes.number.isRequired,
+    color: PropTypes.string.isRequired,
 }
 
 export default GameBoardDivider

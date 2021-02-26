@@ -6,6 +6,9 @@ function App() {
     <div className="app">
       <GameBoard
         size={30}
+        borderColor="black"
+        activeTileColor="white"
+        inactiveTileColor="gray"
       />
     </div>
   );
