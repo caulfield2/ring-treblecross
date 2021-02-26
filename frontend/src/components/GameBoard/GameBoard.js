@@ -50,7 +50,7 @@ function GameBoard(props) {
 
     var degreePos = 0;
 
-    for (var i = 0; i < size; i++) {
+    for (let i = 0; i < size; i++) {
       gameBoard.push(
         <GameBoardTile
           key={i}
@@ -63,7 +63,8 @@ function GameBoard(props) {
           strokeWidth={fillStrokeWidth}
           activeColor={props.activeTileColor}
           inactiveColor={props.inactiveTileColor}
-          isActive={true} // TODO: Set this based on the state of the global game board array
+          isActive={i % 2 === 0 ? true : false} // TODO: Set this based on the state of the global game board array
+          onClick={() => { console.log(`Clicked ${i}`) }}
         />
       );
 

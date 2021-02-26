@@ -10,7 +10,7 @@ function GameBoardTile(props) {
             d={GeometryService.describeArc(props.cx, props.cy, props.r, props.startDegree, props.endDegree)}
             strokeWidth={props.strokeWidth}
             stroke={props.isActive ? props.activeColor : props.inactiveColor}
-            onClick={() => { console.log(`Clicked ${props.i}`) }}
+            onClick={props.isActive ? props.onClick : null}
         />
     );
 }
@@ -26,6 +26,7 @@ GameBoardTile.propTypes = {
     activeColor: PropTypes.string.isRequired,
     inactiveColor: PropTypes.string.isRequired,
     isActive: PropTypes.bool.isRequired,
+    onClick: PropTypes.func.isRequired,
 }
 
 export default GameBoardTile
